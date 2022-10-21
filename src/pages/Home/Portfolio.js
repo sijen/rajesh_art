@@ -4,6 +4,14 @@ import "./home.css";
 import { Button } from "react-bootstrap";
 import { TweenMax, Power3 } from "gsap";
 
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
+import LightGallery from 'lightgallery/react';
+
 import bg from "../../assets/diamond.png";
 import I1 from "../../assets/collection/I1.png";
 import I2 from "../../assets/collection/I2.png";
@@ -46,7 +54,7 @@ const Portfolio = () => {
       //   "translate(0px,0px)";
       TweenMax.staggerTo(
         [image1, image2, image3, image4, image5],
-        0.8,
+        1.3,
         {
           opacity: 1,
           y: 0,
@@ -58,11 +66,11 @@ const Portfolio = () => {
      else {
        TweenMax.staggerTo(
          [image1, image2, image3, image4, image5],
-         0.8,
+         0,
          {
            opacity: 0,
            y: 20,
-           ease: Power3.easeIn,
+           ease: Power3.easeOut,
          },
          0.2
        );
@@ -92,22 +100,28 @@ const Portfolio = () => {
         </div>
       </div>
       <div className="portfolio_images">
-        <img
+        <LightGallery
+                // onInit={onInit}
+                speed={500}
+                plugins={[lgThumbnail, lgZoom]}
+            >
+        <a hre="../../assets/collection/I1.png"><img
           src={I1}
           alt="god"
           className="image"
           ref={(el) => {
             image1 = el;
           }}
-        />
-        <img
+        /></a>
+        <a href="../../assets/collection/I2.png"><img
           src={I2}
           alt="god"
           className="image"
           ref={(el) => {
             image2 = el;
           }}
-        />
+        /></a>
+        <a href="../../assets/collection/I3.png">
         <img
           src={I3}
           alt="god"
@@ -116,6 +130,9 @@ const Portfolio = () => {
             image3 = el;
           }}
         />
+        </a>
+        <a href="../../assets/collection/I4.png">
+
         <img
           src={I4}
           alt="god"
@@ -124,14 +141,20 @@ const Portfolio = () => {
             image4 = el;
           }}
         />
-        <img
+        </a>
+        <a 
+            data-lg-size="1406-1390"
+            className="gallery-item"
+            data-src={image5}
+            data-sub-html="<h4>Photo by - <a href='https://unsplash.com/@entrycube' >Diego Guzmán </a></h4> <p> Location - <a href='https://unsplash.com/s/photos/fushimi-inari-taisha-shrine-senbontorii%2C-68%E7%95%AA%E5%9C%B0-fukakusa-yabunouchicho%2C-fushimi-ward%2C-kyoto%2C-japan'>Fushimi Ward, Kyoto, Japan</a></p>"><img
           src={I5}
           alt="god"
           className="image"
           ref={(el) => {
             image5 = el;
           }}
-        />
+        /></a>
+        </LightGallery>
       </div>
     </div>
   );
